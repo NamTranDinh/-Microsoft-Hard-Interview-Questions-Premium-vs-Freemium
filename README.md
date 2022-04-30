@@ -1,1 +1,1 @@
-# -Microsoft-Hard-Interview-Questions-Premium-vs-Freemium
+# -Microsoft-Hard-Interview-Questions-Premium-vs-Freemium-StrataScratch
