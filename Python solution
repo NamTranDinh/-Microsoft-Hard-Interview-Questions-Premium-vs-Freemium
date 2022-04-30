@@ -1,0 +1,7 @@
+# Start writing code
+ms_user_dimension.head()
+ms_download_facts.date=ms_download_facts.date.dt.date
+join = ms_download_facts.merge(ms_user_dimension,on='user_id',how='inner').merge(ms_acc_dimension,on='acc_id',how='inner')
+join['paying']=(join.paying_customer=='yes').astype(int)*join.downloads
+join['non_paying']=(join.paying_customer=='no').astype(int)*join.downloads
+join.groupby('date',as_index=False).agg({'paying':'sum','non_paying':'sum'}).where(lambda x: x.paying<x.non_paying).dropna()
