@@ -1,0 +1,9 @@
+select date,sum((case when paying_customer= 'yes' then 1 else 0 end)*downloads) as paying, sum((case when paying_customer= 'no' then 1 else 0 end)*downloads) as non_paying
+from ms_download_facts d
+join ms_user_dimension u
+using(user_id)
+join ms_acc_dimension a 
+using(acc_id)
+group by date
+having sum((case when paying_customer= 'no' then 1 else 0 end)*downloads)>sum((case when paying_customer= 'yes' then 1 else 0 end)*downloads)
+order by date
